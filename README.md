@@ -1,54 +1,34 @@
-# WeatherAppMobile — Commandes & workflow (Expo / iOS Dev Client)
+Welcome to your Expo app 👋
+This is an Expo project created with create-expo-app.
 
-Ce projet utilise **Expo + expo-dev-client** (dev build) pour développer l’app sur :
+Get started
+Install dependencies
 
-- ✅ iPhone physique
-- ✅ Simulateur iOS
+npm install
+Start the app
 
-> Important : un **Dev Client** nécessite **Metro** pour charger le JavaScript.  
-> Tu peux travailler **sans internet**, mais **pas sans Metro**.
+npx expo start
+In the output, you'll find options to open the app in a
 
----
+development build
+Android emulator
+iOS simulator
+Expo Go, a limited sandbox for trying out app development with Expo
+You can start developing by editing the files inside the app directory. This project uses file-based routing.
 
-## Prérequis
+Get a fresh project
+When you're ready, run:
 
-- Xcode installé (et `xcode-select` configuré)
-- CocoaPods installé (souvent déjà ok via Xcode)
-- Un simulateur iOS disponible
-- (Optionnel) iPhone branché en USB
+npm run reset-project
+This command will move the starter code to the app-example directory and create a blank app directory where you can start developing.
 
----
+Learn more
+To learn more about developing your project with Expo, look at the following resources:
 
-## Scripts npm disponibles
+Expo documentation: Learn fundamentals, or go into advanced topics with our guides.
+Learn Expo tutorial: Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Join the community
+Join our community of developers creating universal apps.
 
-Dans `package.json`, tu as :
-
-- `npm start`  
-  Lance Metro (serveur JS).  
-  ⚠️ Pour dev-client, privilégie `npx expo start --dev-client`.
-
-- `npm run ios`  
-  Compile + installe l’app iOS (choisit l’appareil iOS disponible : iPhone branché ou simulateur).
-
-- `npm run android`  
-  Compile + installe l’app Android.
-
-- `npm run web`  
-  Lance l’app en version web.
-
-- `npm run lint`  
-  Lance le lint.
-
----
-
-## Développement iOS — Dev Client (recommandé)
-
-### 1) Installer / mettre à jour le Dev Client sur iOS
-
-Cette commande compile et installe l’app native iOS.
-
-#### Sur simulateur iOS (recommandé quand tu n’as pas ton iPhone)
-
-```bash
-npx expo run:ios --scheme "WeatherAppDev" --simulator
-```
+Expo on GitHub: View our open source platform and contribute.
+Discord community: Chat with Expo users and ask questions.
