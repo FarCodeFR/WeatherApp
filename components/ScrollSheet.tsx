@@ -5,20 +5,15 @@ import { StyleSheet, Text } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomBackground from "./BgSheet";
 import HourlyForecast from "./HourlyForecast";
+import WeekForcast from "./WeekForcast";
 
 const ScrollSheet = ({ coords }: ScrollSheetProps) => {
-  // hooks
+  //  * useMemo évite de recréer le tableau à chaque render.
   const snapPoints = useMemo(() => ["95%"], []);
-  // le tableau est le même en mémoire
-  // BottomSheet reste stable
-  // éviter de recréer snapPoints à chaque render
-
-  // callbacks
-  // Même logique que useMemo, mais pour les fonctions.
-  const handleSheetChange = useCallback(() => {
-    console.log("handleSheetChange");
+  // * useCallback évite de recréer la fonction à chaque render
+  const handleSheetChange = useCallback((index: number) => {
+    console.log("BottomSheet index:", index);
   }, []);
-
   return (
     <GestureHandlerRootView style={styles.containerPrincipal}>
       <BottomSheet
@@ -26,8 +21,8 @@ const ScrollSheet = ({ coords }: ScrollSheetProps) => {
         backgroundComponent={CustomBackground}
         snapPoints={snapPoints}
         enableDynamicSizing={false}
-        onChange={handleSheetChange}
         handleComponent={null}
+        onChange={handleSheetChange}
       >
         <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
           {coords ? (
@@ -35,6 +30,7 @@ const ScrollSheet = ({ coords }: ScrollSheetProps) => {
           ) : (
             <Text>Ajouter loading</Text>
           )}
+          <WeekForcast />
         </BottomSheetScrollView>
       </BottomSheet>
     </GestureHandlerRootView>

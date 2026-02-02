@@ -2,34 +2,34 @@ import { useHourly } from "@/hooks/useHourly";
 import { getWeatherInterpretation } from "@/services/meteo-service";
 import { HourlyForecastProps } from "@/types/global";
 import Feather from "@expo/vector-icons/Feather";
-import { ReactHTMLElement } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 // Récupère la date actuel et vérifie si elle est supérieur ou égale à la date de l'api
 function getStartIndexFromNow(times: string[]) {
   const now = new Date();
   const indexTime = times.findIndex((t) => new Date(t) >= now);
-  return indexTime === -1 ? 0 : indexTime;
+  return indexTime;
 }
 
 function HourlyForecast({ coords }: HourlyForecastProps) {
-  const hour = useHourly(coords);
-  const timesNow = hour?.hourly?.time ?? [];
-  const temps = hour?.hourly?.temperature_2m ?? [];
-  const startIndex = getStartIndexFromNow(timesNow);
+  const hourlyData = useHourly(coords);
+  const hourlyTimes = hourlyData?.hourly?.time ?? [];
+  const hourlyTemperatures = hourlyData?.hourly?.temperature_2m ?? [];
+  const startIndex = getStartIndexFromNow(hourlyTimes);
 
-  const items = timesNow.slice(startIndex, startIndex + 24).map((el, index) => {
-    const actuelIndex = startIndex + index;
-    const weatherCode = hour?.hourly?.weather_code?.[actuelIndex] ?? 0;
-    console.log("Weather code at index", actuelIndex, ":", weatherCode);
-    const interpretation = getWeatherInterpretation(weatherCode);
-    return {
-      key: el,
-      hour: new Date(el).toLocaleTimeString("fr-FR", { hour: "2-digit" }),
-      temp: Math.round(temps[actuelIndex]),
-      icon: interpretation.icon,
-    };
-  });
+  const forecastItems = hourlyTimes
+    .slice(startIndex, startIndex + 24)
+    .map((el, index) => {
+      const hourIndex = startIndex + index;
+      const weatherCode = hourlyData?.hourly?.weather_code?.[hourIndex] ?? 0;
+      const interpretation = getWeatherInterpretation(weatherCode);
+      return {
+        key: el,
+        hour: new Date(el).toLocaleTimeString("fr-FR", { hour: "2-digit" }),
+        temp: Math.round(hourlyTemperatures[hourIndex]),
+        icon: interpretation.icon,
+      };
+    });
 
   return (
     <View style={styles.container_forecast_hourly}>
@@ -45,12 +45,12 @@ function HourlyForecast({ coords }: HourlyForecastProps) {
         alwaysBounceHorizontal={true}
         contentContainerStyle={styles.scroll_content_hourly}
       >
-        {items.map((el) => {
+        {forecastItems.map((el) => {
           return (
             <View key={el.key} style={styles.hour_item}>
               <Text style={styles.text_hour}>{el.hour}</Text>
               <Image source={el.icon} style={styles.weather_icon} />
-              <Text style={styles.text_temp}>{el.temp}</Text>
+              <Text style={styles.text_temp}>{el.temp}°</Text>
             </View>
           );
         })}
