@@ -1,4 +1,4 @@
-import { CoordsT } from "@/assets/types/global";
+import { CoordsT } from "@/types/global";
 import { reverseGeocodeAsync } from "expo-location";
 import { useEffect, useState } from "react";
 

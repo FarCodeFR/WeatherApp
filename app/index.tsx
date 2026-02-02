@@ -5,6 +5,7 @@ import { useUserPosition } from "../hooks/useUserPosition";
 import { useWeather } from "@/hooks/useWeather";
 import { useCity } from "@/hooks/useCity";
 import ScrollSheet from "@/components/ScrollSheet";
+import { getWeatherInterpretation } from "@/services/meteo-service";
 
 export default function Index() {
   const coords = useUserPosition();
@@ -12,22 +13,28 @@ export default function Index() {
   const city = useCity(coords);
 
   const currentWeather = weather?.current_weather;
+
   // Lever / coucher du soleil
   const lever = weather?.daily?.sunrise?.[0]?.split("T")?.[1];
   const coucher = weather?.daily?.sunset?.[0]?.split("T")?.[1];
 
+  const weatherClimat = getWeatherInterpretation(currentWeather?.weathercode);
+
   return currentWeather ? (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../assets/images/background/bg-night.png")}
+        source={weatherClimat.image}
         style={styles.bg_img_co}
         resizeMode="cover"
+        blurRadius={1}
       >
+        <View style={styles.overlay} />
         <Heros
           temperature={Math.round(currentWeather?.temperature)}
           city={city}
           lever={lever}
           coucher={coucher}
+          interpretation={weatherClimat}
         />
         <ScrollSheet coords={coords} />
       </ImageBackground>
@@ -52,5 +59,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.36)",
   },
 });

@@ -1,9 +1,9 @@
-import { CoordsT } from "@/assets/types/global";
+import { CoordsT } from "@/types/global";
 
 export class MeteoAPI {
   static async fetchWeatherCoords(coords: CoordsT) {
     const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lng}&hourly=temperature_2m&current_weather=true&daily=sunrise,sunset&timezone=auto`,
+      `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lng}&hourly=temperature_2m,weather_code&current_weather=true&daily=sunrise,sunset&timezone=auto`,
     );
     try {
       if (!response.ok) {

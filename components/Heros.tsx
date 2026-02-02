@@ -1,11 +1,18 @@
-import { HerosProps } from "@/assets/types/global";
+import { HerosProps } from "@/types/global";
 import { StyleSheet, Text, View } from "react-native";
 
-function Heros({ temperature, city, lever, coucher }: HerosProps) {
+function Heros({
+  interpretation,
+  temperature,
+  city,
+  lever,
+  coucher,
+}: HerosProps) {
   return (
     <View style={styles.boxPosition}>
       <Text style={styles.herosText}>{city}</Text>
       <Text style={styles.tempsText}>{temperature || "20"}°</Text>
+      <Text style={styles.climatText}>{interpretation.label}</Text>
       <View style={styles.boxDayNight}>
         <Text style={styles.textDay}>➚ {lever || "18h00"}</Text>
         <Text style={styles.textNight}>{coucher || "9h00"} ➘</Text>
@@ -38,13 +45,20 @@ const styles = StyleSheet.create({
     fontFamily: "SFProRegular",
     margin: 0,
   },
+  climatText: {
+    color: "#bfbfbfdb",
+    fontSize: 20,
+    textAlign: "center",
+    fontFamily: "SFProRegular",
+    marginTop: -10,
+  },
   boxDayNight: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
     gap: 40,
-    marginTop: -5,
+    marginTop: 10,
   },
   textDay: {
     fontSize: 20,

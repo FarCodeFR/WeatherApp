@@ -1,4 +1,4 @@
-import type { CoordsT } from "@/assets/types/global";
+import type { CoordsT } from "@/types/global";
 import {
   getCurrentPositionAsync,
   requestForegroundPermissionsAsync,

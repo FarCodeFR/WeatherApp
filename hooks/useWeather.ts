@@ -1,9 +1,9 @@
 import { MeteoAPI } from "@/api/meteo";
-import { CoordsT, weatherT } from "@/assets/types/global";
+import { CoordsT, WeatherT } from "@/types/global";
 import { useEffect, useState } from "react";
 
 export const useWeather = (coords: CoordsT | null) => {
-  const [weather, setWeather] = useState<weatherT | null>(null);
+  const [weather, setWeather] = useState<WeatherT | null>(null);
 
   //  Météo ( API )
   useEffect(() => {

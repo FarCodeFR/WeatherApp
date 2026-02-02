@@ -1,10 +1,10 @@
-import React, { useCallback, useMemo } from "react";
-import { StyleSheet } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { ScrollSheetProps } from "@/types/global";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import React, { useCallback, useMemo } from "react";
+import { StyleSheet, Text } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomBackground from "./BgSheet";
 import HourlyForecast from "./HourlyForecast";
-import { ScrollSheetProps } from "@/assets/types/global";
 
 const ScrollSheet = ({ coords }: ScrollSheetProps) => {
   // hooks
@@ -30,7 +30,11 @@ const ScrollSheet = ({ coords }: ScrollSheetProps) => {
         handleComponent={null}
       >
         <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
-          {coords ? <HourlyForecast coords={coords} /> : null}{" "}
+          {coords ? (
+            <HourlyForecast coords={coords} />
+          ) : (
+            <Text>Ajouter loading</Text>
+          )}
         </BottomSheetScrollView>
       </BottomSheet>
     </GestureHandlerRootView>
