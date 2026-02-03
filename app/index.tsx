@@ -14,11 +14,16 @@ export default function Index() {
 
   const currentWeather = weather?.current_weather;
 
+  const weatherClimat = currentWeather
+    ? getWeatherInterpretation(
+        currentWeather.weather_code,
+        currentWeather.is_day,
+      )
+    : getWeatherInterpretation(0, 1);
+
   // Lever / coucher du soleil
   const lever = weather?.daily?.sunrise?.[0]?.split("T")?.[1];
   const coucher = weather?.daily?.sunset?.[0]?.split("T")?.[1];
-
-  const weatherClimat = getWeatherInterpretation(currentWeather?.weathercode);
 
   return currentWeather ? (
     <View style={styles.container}>
@@ -59,6 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: "100%",
+    objectFit: "cover",
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
