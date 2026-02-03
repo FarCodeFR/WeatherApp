@@ -5,7 +5,7 @@ import { StyleSheet, Text } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomBackground from "./BgSheet";
 import HourlyForecast from "./HourlyForecast";
-import WeekForcast from "./WeekForcast";
+import WeekForcast from "./WeekForecast";
 
 const ScrollSheet = ({ weather }: ScrollSheetProps) => {
   //  useMemo évite de recréer le tableau à chaque render.
