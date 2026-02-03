@@ -6,7 +6,6 @@ import Feather from "@expo/vector-icons/Feather";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 function WeekForcast({ daily }: PropsDayHour) {
-  console.log("ICI", daily);
   const daysForWeek = daily.time.map((date, i) => ({
     key: date,
     day: dayWeek(date),
@@ -14,6 +13,14 @@ function WeekForcast({ daily }: PropsDayHour) {
     max: daily.temperature_2m_max[i],
     min: daily.temperature_2m_min[i],
   }));
+
+  // min semaine
+  const weekmin = Math.round(Math.min(...daily.temperature_2m_min));
+  // max semaine
+  const weekmax = Math.round(Math.max(...daily.temperature_2m_max));
+  // l'amplitude semaine
+  const startX = weekmax - weekmin;
+  const largeurBar = 90;
 
   return (
     <View style={styles.containerWeekForecastCard}>
@@ -39,7 +46,17 @@ function WeekForcast({ daily }: PropsDayHour) {
                 <Text style={styles.weekForecastTempMin}>
                   {Math.round(el.min)}°
                 </Text>
-
+                <View style={styles.containerBarWeather}>
+                  <View
+                    style={[
+                      styles.containerForecastBarLine,
+                      {
+                        left: ((el.min - weekmin) / startX) * largeurBar,
+                        width: ((el.max - el.min) / startX) * largeurBar,
+                      },
+                    ]}
+                  ></View>
+                </View>
                 <Text style={styles.weekForecastTempMax}>
                   {Math.round(el.max)}°
                 </Text>
@@ -121,13 +138,29 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 
+  // Barre
+  containerBarWeather: {
+    position: "relative",
+    width: 90,
+    height: 6,
+    borderRadius: 2,
+    justifyContent: "center",
+    backgroundColor: "rgba(255,255,255,0.18)",
+  },
+  containerForecastBarLine: {
+    position: "absolute",
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "#FFA500",
+  },
+
   /* Temps */
   containerWeekForecastTemps: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "flex-end",
-    alignItems: "baseline",
-    gap: 6,
+    alignItems: "center",
+    gap: 8,
   },
   weekForecastTempMin: {
     color: "rgba(255,255,255,0.65)",
