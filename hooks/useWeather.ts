@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 
 export const useWeather = (coords: CoordsT | null) => {
   const [weather, setWeather] = useState<WeatherT | null>(null);
-
   //  Météo ( API )
   useEffect(() => {
     if (coords) {

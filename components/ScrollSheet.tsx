@@ -5,15 +5,20 @@ import { StyleSheet, Text } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomBackground from "./BgSheet";
 import HourlyForecast from "./HourlyForecast";
-import WeekForcast from "./WeekForcast";
+import WeekForcast from "./WeekForecast";
 
-const ScrollSheet = ({ coords }: ScrollSheetProps) => {
-  //  * useMemo évite de recréer le tableau à chaque render.
+const ScrollSheet = ({ weather }: ScrollSheetProps) => {
+  //  useMemo évite de recréer le tableau à chaque render.
   const snapPoints = useMemo(() => ["95%"], []);
-  // * useCallback évite de recréer la fonction à chaque render
+  //  useCallback évite de recréer la fonction à chaque render
   const handleSheetChange = useCallback((index: number) => {
     console.log("BottomSheet index:", index);
   }, []);
+  // Les heures
+  const hourly = weather?.hourly;
+  // Les jours
+  const daily = weather?.daily;
+
   return (
     <GestureHandlerRootView style={styles.containerPrincipal}>
       <BottomSheet
@@ -25,12 +30,16 @@ const ScrollSheet = ({ coords }: ScrollSheetProps) => {
         onChange={handleSheetChange}
       >
         <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
-          {coords ? (
-            <HourlyForecast coords={coords} />
+          {hourly ? (
+            <HourlyForecast hourly={hourly} />
           ) : (
-            <Text>Ajouter loading</Text>
+            <Text>Chargement...</Text>
           )}
-          <WeekForcast />
+          {daily && hourly ? (
+            <WeekForcast daily={daily} />
+          ) : (
+            <Text>Chargement...</Text>
+          )}
         </BottomSheetScrollView>
       </BottomSheet>
     </GestureHandlerRootView>

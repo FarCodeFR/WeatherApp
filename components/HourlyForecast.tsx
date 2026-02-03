@@ -1,35 +1,11 @@
-import { useHourly } from "@/hooks/useHourly";
-import { getWeatherInterpretation } from "@/services/meteo-service";
-import { HourlyForecastProps } from "@/types/global";
+import { hourlyWeek } from "@/services/forecast-mappers";
+import { HourlyData, HourlyForecastProps } from "@/types/global";
 import Feather from "@expo/vector-icons/Feather";
+import { useState } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
-// Récupère la date actuel et vérifie si elle est supérieur ou égale à la date de l'api
-function getStartIndexFromNow(times: string[]) {
-  const now = new Date();
-  const indexTime = times.findIndex((t) => new Date(t) >= now);
-  return indexTime;
-}
-
-function HourlyForecast({ coords }: HourlyForecastProps) {
-  const hourlyData = useHourly(coords);
-  const hourlyTimes = hourlyData?.hourly?.time ?? [];
-  const hourlyTemperatures = hourlyData?.hourly?.temperature_2m ?? [];
-  const startIndex = getStartIndexFromNow(hourlyTimes);
-
-  const forecastItems = hourlyTimes
-    .slice(startIndex, startIndex + 24)
-    .map((el, index) => {
-      const hourIndex = startIndex + index;
-      const weatherCode = hourlyData?.hourly?.weather_code?.[hourIndex] ?? 0;
-      const interpretation = getWeatherInterpretation(weatherCode);
-      return {
-        key: el,
-        hour: new Date(el).toLocaleTimeString("fr-FR", { hour: "2-digit" }),
-        temp: Math.round(hourlyTemperatures[hourIndex]),
-        icon: interpretation.icon,
-      };
-    });
+function HourlyForecast({ hourly }: HourlyForecastProps) {
+  const weatherForecast = hourlyWeek(hourly, 24);
 
   return (
     <View style={styles.container_forecast_hourly}>
@@ -45,7 +21,7 @@ function HourlyForecast({ coords }: HourlyForecastProps) {
         alwaysBounceHorizontal={true}
         contentContainerStyle={styles.scroll_content_hourly}
       >
-        {forecastItems.map((el) => {
+        {weatherForecast.map((el) => {
           return (
             <View key={el.key} style={styles.hour_item}>
               <Text style={styles.text_hour}>{el.hour}</Text>
