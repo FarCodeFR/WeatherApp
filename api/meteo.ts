@@ -3,7 +3,7 @@ import { CoordsT } from "@/types/global";
 export class MeteoAPI {
   static async fetchWeatherCoords(coords: CoordsT) {
     const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lng}&hourly=temperature_2m,weather_code&current_weather=true&daily=sunrise,sunset&timezone=auto`,
+      `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lng}&current_weather=true&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto`,
     );
     try {
       if (!response.ok) {

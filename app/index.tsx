@@ -36,7 +36,7 @@ export default function Index() {
           coucher={coucher}
           interpretation={weatherClimat}
         />
-        <ScrollSheet coords={coords} />
+        <ScrollSheet coords={coords} weather={weather} />
       </ImageBackground>
     </View>
   ) : (

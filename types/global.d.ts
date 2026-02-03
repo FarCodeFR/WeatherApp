@@ -27,16 +27,29 @@ export type WeatherInterpretation = {
 
 export type ScrollSheetProps = {
   coords: CoordsT | null;
+  weather: WeatherT | null;
 };
 export type HourlyForecastProps = {
-  coords: CoordsT;
+  hourly: HourlyData;
+};
+
+export type DailyData = {
+  sunrise: string[];
+  sunset: string[];
+  time: string[];
+  weather_code: number[];
+  temperature_2m_max: number[];
+  temperature_2m_min: number[];
+};
+
+export type WeekForecastProps = DailyData;
+
+export type PropsDayHour = {
+  daily: DailyData;
 };
 
 export type WeatherT = {
   current_weather: CurrentWeather | null;
-  hourly?: HourlyData;
-  daily?: {
-    sunrise: string[];
-    sunset: string[];
-  };
+  hourly: HourlyData;
+  daily: DailyData;
 };
