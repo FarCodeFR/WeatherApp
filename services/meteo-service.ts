@@ -4,6 +4,7 @@ import { WeatherInterpretation } from "@/types/global";
 export function getWeatherInterpretation(
   codes: number,
   isDay: number = 1,
+  cloudCover?: number,
 ): WeatherInterpretation {
   const WEATHER_INTERPRETATIONS: WeatherInterpretation[] = [
     {

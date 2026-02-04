@@ -16,10 +16,12 @@ export default function Index() {
 
   const weatherClimat = currentWeather
     ? getWeatherInterpretation(
-        currentWeather.weather_code,
+        currentWeather.weathercode,
         currentWeather.is_day,
       )
     : getWeatherInterpretation(0, 1);
+  console.log("currentWeather.weather_code =", currentWeather?.weather_code);
+  console.log("currentWeather =", currentWeather);
 
   // Lever / coucher du soleil
   const lever = weather?.daily?.sunrise?.[0]?.split("T")?.[1];

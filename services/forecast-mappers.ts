@@ -6,7 +6,6 @@ export function hourlyWeek(hourly: HourlyData, count = 24) {
   const hourlyTimes = hourly?.time ?? [];
   const hourlyTemperatures = hourly?.temperature_2m ?? [];
   const startIndex = getStartIndexFromNow(hourlyTimes);
-  console.log(startIndex, startIndex + count);
   const forecastItems = hourlyTimes
     .slice(startIndex, startIndex + count)
     .map((el, index) => {
