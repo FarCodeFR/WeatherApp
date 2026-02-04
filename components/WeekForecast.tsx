@@ -2,8 +2,8 @@ import { dayWeek } from "@/services/forecast-utils";
 import { getWeatherInterpretation } from "@/services/meteo-service";
 import { PropsDayHour } from "@/types/global";
 import Feather from "@expo/vector-icons/Feather";
-import { ColorValue, Image, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { ColorValue, Image, StyleSheet, Text, View } from "react-native";
 
 function WeekForcast({ daily }: PropsDayHour) {
   const daysForWeek = daily.time.map((date, i) => ({
