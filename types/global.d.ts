@@ -40,6 +40,7 @@ export type DailyData = {
   weather_code: number[];
   temperature_2m_max: number[];
   temperature_2m_min: number[];
+  temperature_2m_mean: number[];
 };
 
 export type WeekForecastProps = DailyData;
