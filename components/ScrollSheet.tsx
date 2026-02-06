@@ -29,7 +29,14 @@ const ScrollSheet = ({ weather }: ScrollSheetProps) => {
         handleComponent={null}
         onChange={handleSheetChange}
       >
-        <BottomSheetScrollView contentContainerStyle={styles.contentContainer}>
+        <BottomSheetScrollView
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={[
+            styles.contentContainer,
+            { paddingBottom: 80 },
+          ]}
+        >
           {hourly ? (
             <HourlyForecast hourly={hourly} />
           ) : (

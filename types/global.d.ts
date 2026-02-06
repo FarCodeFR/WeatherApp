@@ -16,6 +16,7 @@ export interface HourlyData {
   time: string[];
   temperature_2m: number[];
   weather_code?: number[];
+  cloud_cover?: number[];
 }
 
 export type WeatherInterpretation = {

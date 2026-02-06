@@ -22,7 +22,7 @@ export default function RootLayout() {
   }
   return (
     <ThemeProvider value={DefaultTheme}>
-      <Stack screenOptions={{ headerShown: false }}></Stack>
+      <Stack screenOptions={{ headerShown: false }} />
       <StatusBar style="light" />
     </ThemeProvider>
   );

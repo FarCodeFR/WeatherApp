@@ -1,11 +1,11 @@
+import Heros from "@/components/Heros";
 import Loader from "@/components/Loader";
-import { ImageBackground, StyleSheet, View } from "react-native";
-import Heros from "../components/Heros";
-import { useUserPosition } from "../hooks/useUserPosition";
-import { useWeather } from "@/hooks/useWeather";
-import { useCity } from "@/hooks/useCity";
 import ScrollSheet from "@/components/ScrollSheet";
+import { useCity } from "@/hooks/useCity";
+import { useUserPosition } from "@/hooks/useUserPosition";
+import { useWeather } from "@/hooks/useWeather";
 import { getWeatherInterpretation } from "@/services/meteo-service";
+import { ImageBackground, StyleSheet, View } from "react-native";
 
 export default function Index() {
   const coords = useUserPosition();
@@ -16,12 +16,10 @@ export default function Index() {
 
   const weatherClimat = currentWeather
     ? getWeatherInterpretation(
-        currentWeather.weathercode,
+        currentWeather.weather_code,
         currentWeather.is_day,
       )
     : getWeatherInterpretation(0, 1);
-  console.log("currentWeather.weather_code =", currentWeather?.weather_code);
-  console.log("currentWeather =", currentWeather);
 
   // Lever / coucher du soleil
   const lever = weather?.daily?.sunrise?.[0]?.split("T")?.[1];
