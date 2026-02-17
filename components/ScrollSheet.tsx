@@ -1,22 +1,32 @@
 import { ScrollSheetProps } from "@/types/global";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { StyleSheet, Text } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import CustomBackground from "./BgSheet";
 import HourlyForecast from "./HourlyForecast";
+import SearchBar from "./SearchBar";
 import WeekForcast from "./WeekForecast";
 
-const ScrollSheet = ({ weather }: ScrollSheetProps) => {
-  //  useMemo évite de recréer le tableau à chaque render.
+const ScrollSheet = ({ weather, searchCity }: ScrollSheetProps) => {
+  const [cityText, setCityText] = useState("");
+
   const snapPoints = useMemo(() => ["95%"], []);
-  //  useCallback évite de recréer la fonction à chaque render
+
+  // function pour récupérer les infos de la barre de recherche
+  // en enlevant les espaces et en réinitialisant le state une fois envoyé
+  const handleSubmit = useCallback(() => {
+    const cityName = cityText.trim();
+    if (!cityName) return;
+    searchCity(cityName);
+    setCityText("");
+  }, [cityText, searchCity]);
+
   const handleSheetChange = useCallback((index: number) => {
     console.log("BottomSheet index:", index);
   }, []);
-  // Les heures
+
   const hourly = weather?.hourly;
-  // Les jours
   const daily = weather?.daily;
 
   return (
@@ -47,6 +57,11 @@ const ScrollSheet = ({ weather }: ScrollSheetProps) => {
           ) : (
             <Text>Chargement...</Text>
           )}
+          <SearchBar
+            value={cityText}
+            onChange={setCityText}
+            onSubmit={handleSubmit}
+          />
         </BottomSheetScrollView>
       </BottomSheet>
     </GestureHandlerRootView>

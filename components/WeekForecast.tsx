@@ -6,6 +6,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ColorValue, Image, StyleSheet, Text, View } from "react-native";
 
 function WeekForcast({ daily }: PropsDayHour) {
+  if (!daily) return null;
   const daysForWeek = daily.time.map((date, i) => ({
     key: date,
     day: dayWeek(date),
@@ -13,6 +14,7 @@ function WeekForcast({ daily }: PropsDayHour) {
     max: daily.temperature_2m_max[i],
     min: daily.temperature_2m_min[i],
     now: daily.temperature_2m_mean[0],
+    isDay: daily.is_day?.[i] ?? 1,
   }));
 
   // min semaine
@@ -51,7 +53,7 @@ function WeekForcast({ daily }: PropsDayHour) {
               <Text style={styles.weekForecastDay}>{el.day}</Text>
               <View style={styles.containerWeekForecastIconSlot}>
                 <Image
-                  source={getWeatherInterpretation(el.code).icon}
+                  source={getWeatherInterpretation(el.code, el.isDay).icon}
                   style={styles.weather_icon}
                 />
               </View>

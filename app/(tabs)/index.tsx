@@ -1,16 +1,12 @@
 import Heros from "@/components/Heros";
 import Loader from "@/components/Loader";
 import ScrollSheet from "@/components/ScrollSheet";
-import { useCity } from "@/hooks/useCity";
-import { useUserPosition } from "@/hooks/useUserPosition";
-import { useWeather } from "@/hooks/useWeather";
 import { getWeatherInterpretation } from "@/services/meteo-service";
 import { ImageBackground, StyleSheet, View } from "react-native";
+import { useLocationCity } from "@/hooks/useLocationCity";
 
 export default function Index() {
-  const coords = useUserPosition();
-  const weather = useWeather(coords);
-  const city = useCity(coords);
+  const { weather, city, searchCity } = useLocationCity();
 
   const currentWeather = weather?.current_weather;
 
@@ -21,7 +17,6 @@ export default function Index() {
       )
     : getWeatherInterpretation(0, 1);
 
-  // Lever / coucher du soleil
   const lever = weather?.daily?.sunrise?.[0]?.split("T")?.[1];
   const coucher = weather?.daily?.sunset?.[0]?.split("T")?.[1];
 
@@ -35,13 +30,13 @@ export default function Index() {
       >
         <View style={styles.overlay} />
         <Heros
-          temperature={Math.round(currentWeather?.temperature)}
+          temperature={Math.round(currentWeather.temperature ?? 0)}
           city={city}
           lever={lever}
           coucher={coucher}
           interpretation={weatherClimat}
         />
-        <ScrollSheet coords={coords} weather={weather} />
+        <ScrollSheet weather={weather} searchCity={searchCity} />
       </ImageBackground>
     </View>
   ) : (

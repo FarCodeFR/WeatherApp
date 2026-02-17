@@ -13,7 +13,6 @@ export function hourlyWeek(hourly: HourlyData, count = 24) {
       const weatherCode = hourly?.weather_code?.[hourIndex] ?? 0;
       const cloudCover = hourly?.cloud_cover?.[hourIndex] ?? 0;
       const interpretation = getWeatherInterpretation(weatherCode, cloudCover);
-      console.log(interpretation);
       return {
         key: el,
         hour: formatHour(el),
