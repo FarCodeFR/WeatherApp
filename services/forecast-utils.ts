@@ -11,6 +11,7 @@ export function getStartIndexFromNow(times: string[]) {
   return indexTime;
 }
 
+// Format heur française
 export function formatHour(date: string) {
   return new Date(date).toLocaleTimeString("fr-FR", { hour: "2-digit" });
 }

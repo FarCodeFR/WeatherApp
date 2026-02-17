@@ -11,7 +11,8 @@ export function hourlyWeek(hourly: HourlyData, count = 24) {
     .map((el, index) => {
       const hourIndex = startIndex + index;
       const weatherCode = hourly?.weather_code?.[hourIndex] ?? 0;
-      const interpretation = getWeatherInterpretation(weatherCode);
+      const cloudCover = hourly?.cloud_cover?.[hourIndex] ?? 0;
+      const interpretation = getWeatherInterpretation(weatherCode, cloudCover);
       return {
         key: el,
         hour: formatHour(el),

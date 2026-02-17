@@ -16,6 +16,7 @@ export interface HourlyData {
   time: string[];
   temperature_2m: number[];
   weather_code?: number[];
+  cloud_cover?: number[];
 }
 
 export type WeatherInterpretation = {
@@ -25,8 +26,15 @@ export type WeatherInterpretation = {
   icon: ImageSourcePropType;
 };
 
+export type SearchBarProps = {
+  value: string;
+  onChange: (text: string) => void;
+  onSubmit: () => void;
+};
+
 export type ScrollSheetProps = {
-  coords: CoordsT | null;
+  // coords: CoordsT | null;
+  searchCity: (cityName: string) => void | Promise<void>;
   weather: WeatherT | null;
 };
 export type HourlyForecastProps = {
@@ -37,6 +45,7 @@ export type DailyData = {
   sunrise: string[];
   sunset: string[];
   time: string[];
+  is_day?: number[];
   weather_code: number[];
   temperature_2m_max: number[];
   temperature_2m_min: number[];
@@ -46,7 +55,7 @@ export type DailyData = {
 export type WeekForecastProps = DailyData;
 
 export type PropsDayHour = {
-  daily: DailyData;
+  daily?: DailyData;
 };
 
 export type WeatherT = {

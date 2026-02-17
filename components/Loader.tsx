@@ -13,7 +13,7 @@ function Loader() {
       resizeMode="cover"
       blurRadius={5}
     >
-      <ActivityIndicator size="large" color="#00ff00" />
+      <ActivityIndicator size="large" color="rgba(255,255,255,0.85)" />
       <Text style={styles.message}>Connexion interrompue</Text>
     </ImageBackground>
   );
