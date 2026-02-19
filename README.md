@@ -32,5 +32,4 @@ Join our community of developers creating universal apps.
 
 Expo on GitHub: View our open source platform and contribute.
 Discord community: Chat with Expo users and ask questions.
-
-<img width="441" height="922" alt="Capture d’écran 2026-01-28 à 08 59 14" src="https://github.com/user-attachments/assets/3d5bc2b8-7521-4d38-83b1-fecee5a166d5" />
+<img width="443" height="924" alt="Capture d’écran 2026-02-19 à 09 16 54" src="https://github.com/user-attachments/assets/0f997617-318e-40f9-b8af-8a40d5fea876" />
