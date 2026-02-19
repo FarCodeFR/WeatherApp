@@ -23,7 +23,7 @@ export function getWeatherInterpretation(
       icon: require("../assets/images/weather/cloudy.png"),
     },
     {
-      codes: [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 85, 86],
+      codes: [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82],
       label: isDay ? "Pluvieux" : "Nuit pluvieuse",
       image: require("../assets/images/background/bg-rain.jpg"),
       icon: require("../assets/images/weather/rain.png"),
@@ -33,6 +33,12 @@ export function getWeatherInterpretation(
       label: isDay ? "Orageux" : "Nuit orageuse",
       image: require("../assets/images/background/bg-thunder.jpg"),
       icon: require("../assets/images/weather/thunder.png"),
+    },
+    {
+      codes: [71, 73, 75, 77, 85, 86],
+      label: isDay ? "Neige" : "Neige nocturne",
+      image: require("../assets/video/snow.mp4"),
+      icon: require("../assets/images/weather/snow.png"),
     },
   ];
 

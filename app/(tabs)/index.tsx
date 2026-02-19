@@ -5,11 +5,12 @@ import { useLocationCity } from "@/hooks/useLocationCity";
 import { computeIsDay, formatHour } from "@/services/forecast-utils";
 import { getWeatherInterpretation } from "@/services/meteo-service";
 import { ImageBackground, StyleSheet, View } from "react-native";
+import { VideoView } from "expo-video";
 
 export default function Index() {
   const { weather, city, searchCity } = useLocationCity();
   const currentWeather = weather?.current_weather;
-  const apiDay = currentWeather?.is_day;
+  const day = currentWeather?.is_day;
 
   const sunriseISO = weather?.daily?.sunrise?.[0];
   const sunsetISO = weather?.daily?.sunset?.[0];
@@ -17,11 +18,12 @@ export default function Index() {
 
   const lever = sunriseISO ? formatHour(sunriseISO) : "Lever indisponible";
   const coucher = sunsetISO ? formatHour(sunsetISO) : "Coucher indisponible";
-  console.log(currentWeather);
+
+  // Vérification que isDay est bien en journée entre lever et coucher de soleil
   const isDaySafe =
     sunriseISO && sunsetISO && nowISO
       ? computeIsDay(nowISO, sunriseISO, sunsetISO)
-      : Number(apiDay) === 1;
+      : Number(day) === 1;
 
   const weatherClimat = currentWeather
     ? getWeatherInterpretation(currentWeather.weathercode, isDaySafe)
@@ -29,6 +31,7 @@ export default function Index() {
 
   return currentWeather ? (
     <View style={styles.container}>
+      <VideoView player={weatherClimat.image} />
       <ImageBackground
         source={weatherClimat.image}
         style={styles.bg_img_co}
@@ -66,6 +69,10 @@ const styles = StyleSheet.create({
     fontSize: 40,
     width: 100,
     height: 100,
+  },
+  video: {
+    width: 350,
+    height: 275,
   },
   bg_img_co: {
     flex: 1,
