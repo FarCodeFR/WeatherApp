@@ -37,7 +37,8 @@ export function getWeatherInterpretation(
     {
       codes: [71, 73, 75, 77, 85, 86],
       label: isDay ? "Neige" : "Neige nocturne",
-      image: require("../assets/video/snow.mp4"),
+      video: require("../assets/video/snow.mp4"),
+      image: require("../assets/images/background/bg-night.webp"),
       icon: require("../assets/images/weather/snow.png"),
     },
   ];

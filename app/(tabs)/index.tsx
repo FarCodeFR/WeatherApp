@@ -5,7 +5,7 @@ import { useLocationCity } from "@/hooks/useLocationCity";
 import { computeIsDay, formatHour } from "@/services/forecast-utils";
 import { getWeatherInterpretation } from "@/services/meteo-service";
 import { ImageBackground, StyleSheet, View } from "react-native";
-import { VideoView } from "expo-video";
+import { useVideoPlayer, VideoView } from "expo-video";
 
 export default function Index() {
   const { weather, city, searchCity } = useLocationCity();
@@ -29,16 +29,38 @@ export default function Index() {
     ? getWeatherInterpretation(currentWeather.weathercode, isDaySafe)
     : getWeatherInterpretation(0, true);
 
+  // Vidéo
+
+  const videoSource = weatherClimat.video;
+
+  const player = useVideoPlayer(videoSource ?? null, (p) => {
+    if (!videoSource) return;
+    p.loop = true;
+    p.play();
+  });
   return currentWeather ? (
     <View style={styles.container}>
-      <VideoView player={weatherClimat.image} />
-      <ImageBackground
-        source={weatherClimat.image}
-        style={styles.bg_img_co}
-        resizeMode="cover"
-        blurRadius={1}
-      >
-        <View style={styles.overlay} />
+      {/* FOND : vidéo ou image */}
+      {videoSource ? (
+        <VideoView
+          player={player}
+          contentFit="cover"
+          style={styles.background}
+        />
+      ) : (
+        <ImageBackground
+          source={weatherClimat.image}
+          style={styles.background}
+          resizeMode="cover"
+          blurRadius={1}
+        />
+      )}
+
+      {/* OVERLAY */}
+      <View style={styles.overlay} />
+
+      {/* CONTENU DEVANT */}
+      <View style={styles.content}>
         <Heros
           temperature={Math.round(currentWeather.temperature ?? 0)}
           city={city}
@@ -46,42 +68,35 @@ export default function Index() {
           coucher={coucher}
           interpretation={weatherClimat}
         />
+
         <ScrollSheet
           sunriseISO={sunriseISO}
           sunsetISO={sunsetISO}
           weather={weather}
           searchCity={searchCity}
         />
-      </ImageBackground>
+      </View>
     </View>
   ) : (
     <Loader />
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
+  container: { flex: 1 },
+
+  background: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 0,
   },
-  logo: {
-    fontSize: 40,
-    width: 100,
-    height: 100,
-  },
-  video: {
-    width: 350,
-    height: 275,
-  },
-  bg_img_co: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-  },
+
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0, 0, 0, 0.26)",
+    backgroundColor: "rgba(0,0,0,0.26)",
+    zIndex: 1,
+  },
+
+  content: {
+    flex: 1,
+    zIndex: 2,
   },
 });
