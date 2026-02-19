@@ -36,9 +36,13 @@ export type ScrollSheetProps = {
   // coords: CoordsT | null;
   searchCity: (cityName: string) => void | Promise<void>;
   weather: WeatherT | null;
+  sunriseISO?: string;
+  sunsetISO?: string;
 };
 export type HourlyForecastProps = {
   hourly: HourlyData;
+  sunriseISO?: string;
+  sunsetISO?: string;
 };
 
 export type DailyData = {

@@ -1,11 +1,14 @@
 import { hourlyWeek } from "@/services/forecast-mappers";
-import { HourlyData, HourlyForecastProps } from "@/types/global";
+import { HourlyForecastProps } from "@/types/global";
 import Feather from "@expo/vector-icons/Feather";
-import { useState } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
-function HourlyForecast({ hourly }: HourlyForecastProps) {
-  const weatherForecast = hourlyWeek(hourly, 24);
+function HourlyForecast({
+  hourly,
+  sunriseISO,
+  sunsetISO,
+}: HourlyForecastProps) {
+  const weatherForecast = hourlyWeek(hourly, sunriseISO, sunsetISO, 24);
 
   return (
     <View style={styles.container_forecast_hourly}>

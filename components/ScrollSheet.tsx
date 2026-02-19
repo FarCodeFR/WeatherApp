@@ -8,7 +8,12 @@ import HourlyForecast from "./HourlyForecast";
 import SearchBar from "./SearchBar";
 import WeekForcast from "./WeekForecast";
 
-const ScrollSheet = ({ weather, searchCity }: ScrollSheetProps) => {
+const ScrollSheet = ({
+  sunriseISO,
+  sunsetISO,
+  weather,
+  searchCity,
+}: ScrollSheetProps) => {
   const [cityText, setCityText] = useState("");
 
   const snapPoints = useMemo(() => ["95%"], []);
@@ -17,9 +22,12 @@ const ScrollSheet = ({ weather, searchCity }: ScrollSheetProps) => {
   // en enlevant les espaces et en réinitialisant le state une fois envoyé
   const handleSubmit = useCallback(() => {
     const cityName = cityText.trim();
-    if (!cityName) return;
-    searchCity(cityName);
-    setCityText("");
+    if (!cityName) {
+      return;
+    } else {
+      searchCity(cityName);
+      setCityText("");
+    }
   }, [cityText, searchCity]);
 
   const handleSheetChange = useCallback((index: number) => {
@@ -48,7 +56,11 @@ const ScrollSheet = ({ weather, searchCity }: ScrollSheetProps) => {
           ]}
         >
           {hourly ? (
-            <HourlyForecast hourly={hourly} />
+            <HourlyForecast
+              hourly={hourly}
+              sunriseISO={sunriseISO}
+              sunsetISO={sunsetISO}
+            />
           ) : (
             <Text>Chargement...</Text>
           )}

@@ -17,10 +17,12 @@ export function useLocationCity() {
     if (gpsCoords) setCoords(gpsCoords);
   }, [gpsCoords]);
 
-  //  Mets à jour city
+  //  Mets à jour city avec la localisation
   useEffect(() => {
     async function fetchCity() {
-      if (!coords) return;
+      if (!coords) {
+        return;
+      }
       try {
         const result = await reverseGeocodeAsync({
           latitude: coords.lat,
@@ -35,19 +37,28 @@ export function useLocationCity() {
     fetchCity();
   }, [coords]);
 
-  // 3) Météo dépend des coords
+  // Météo coords
   const weather = useWeather(coords);
 
-  // 4) Recherche : nom de ville -> coords
+  //  Mets à jour city avec la barre de recherche
   const searchCity = useCallback(async (cityName: string) => {
-    const name = cityName.trim();
-    if (!name) return;
-
-    const data = await CityAPI.searchCity(name);
-    const first = data?.results?.[0];
-    if (!first) return;
-
-    setCoords({ lat: first.latitude, lng: first.longitude });
+    const city = cityName.trim();
+    if (!city) {
+      return;
+    }
+    try {
+      const response = await CityAPI.searchCity(city);
+      const result = response?.results?.[0];
+      if (!result) {
+        return;
+      }
+      setCoords({
+        lat: result.latitude,
+        lng: result.longitude,
+      });
+    } catch (error) {
+      console.error("Erreur recherche ville:", error);
+    }
   }, []);
 
   return { coords, city, weather, searchCity };

@@ -1,9 +1,10 @@
 import { WeatherInterpretation } from "@/types/global";
 
-// On ajoute une fonction utilitaire pour transformer l'interprétation selon le moment
+// On ajoute une fonction utilitaire pour transformer
+// l'interprétation selon le moment
 export function getWeatherInterpretation(
   codes: number,
-  isDay: number,
+  isDay: boolean,
 ): WeatherInterpretation {
   const WEATHER_INTERPRETATIONS: WeatherInterpretation[] = [
     {
