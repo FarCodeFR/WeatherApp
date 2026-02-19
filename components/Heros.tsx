@@ -10,9 +10,9 @@ function Heros({
 }: HerosProps) {
   return (
     <View style={styles.boxPosition}>
-      <Text style={styles.herosText}>{city}</Text>
+      <Text style={styles.herosText}>{city || "Ici"}</Text>
       <Text style={styles.tempsText}>{temperature || "20"}°</Text>
-      <Text style={styles.climatText}>{interpretation.label}</Text>
+      <Text style={styles.climatText}>{interpretation.label || "Inconnu"}</Text>
       <View style={styles.boxDayNight}>
         <Text style={styles.textDay}>➚ {lever || "18h00"}</Text>
         <Text style={styles.textNight}>{coucher || "9h00"} ➘</Text>

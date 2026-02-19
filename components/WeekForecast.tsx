@@ -14,9 +14,8 @@ function WeekForcast({ daily }: PropsDayHour) {
     max: daily.temperature_2m_max[i],
     min: daily.temperature_2m_min[i],
     now: daily.temperature_2m_mean[0],
-    isDay: daily.is_day?.[i] ?? 1,
+    isDay: (daily.is_day?.[i] ?? 1) === 1,
   }));
-
   // min semaine
   const weekmin = Math.round(Math.min(...daily.temperature_2m_min));
   // max semaine

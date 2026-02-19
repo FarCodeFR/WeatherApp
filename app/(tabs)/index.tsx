@@ -15,16 +15,16 @@ export default function Index() {
   const sunsetISO = weather?.daily?.sunset?.[0];
   const nowISO = weather?.current_weather?.time;
 
-  const lever = sunriseISO ? formatHour(sunriseISO) : undefined;
-  const coucher = sunsetISO ? formatHour(sunsetISO) : undefined;
-
+  const lever = sunriseISO ? formatHour(sunriseISO) : "Lever indisponible";
+  const coucher = sunsetISO ? formatHour(sunsetISO) : "Coucher indisponible";
+  console.log(currentWeather);
   const isDaySafe =
     sunriseISO && sunsetISO && nowISO
       ? computeIsDay(nowISO, sunriseISO, sunsetISO)
       : Number(apiDay) === 1;
 
   const weatherClimat = currentWeather
-    ? getWeatherInterpretation(currentWeather.weather_code, isDaySafe)
+    ? getWeatherInterpretation(currentWeather.weathercode, isDaySafe)
     : getWeatherInterpretation(0, true);
 
   return currentWeather ? (
