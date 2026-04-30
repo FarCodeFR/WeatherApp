@@ -1,8 +1,6 @@
 # 🌤️ WeatherApp
 
-Une application météo mobile développée avec **React Native** et **Expo**, offrant des prévisions météo en temps réel basées sur la géolocalisation.
-
----
+Une application météo mobile développée avec **React Native** et **Expo** et en utilisant l'api open-meteo.com, offrant des prévisions météo en temps réel basées sur la géolocalisation.
 
 ## 📱 Aperçu
 
