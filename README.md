@@ -7,7 +7,7 @@ Une application météo mobile développée avec **React Native** et **Expo**, o
 ## 📱 Aperçu
 
 <p align="center">
-<img width="443" height="924" alt="Capture d’écran 2026-02-19 à 09 16 54" src="https://github.com/user-attachments/assets/0f997617-318e-40f9-b8af-8a40d5fea876" />
+<img width="445" height="928" alt="Accueil application météo" src="https://github.com/user-attachments/assets/54aed776-9880-4431-8cff-abc597e022a2" />
 </p>
 
 ---
@@ -113,10 +113,4 @@ WeatherApp/
 
 ---
 
-## 📄 Licence
-
-Ce projet est sous licence **MIT**. Voir le fichier [LICENSE](./LICENSE) pour plus de détails.
-
----
-
-<p align="center">Fait avec ❤️ par <a href="https://github.com/FarCodeFR">FarCodeFR</a></p>
+<p align="center">Réalisé par <a href="https://github.com/FarCodeFR">FarCodeFR</a></p>
