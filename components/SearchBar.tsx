@@ -5,8 +5,8 @@ function SearchBar({ value, onChange, onSubmit }: SearchBarProps) {
   return (
     <TextInput
       style={styles.containerSearchBar}
-      placeholder="Recherche ta ville"
-      placeholderTextColor={"white"}
+      placeholder="Recherche votre ville..."
+      placeholderTextColor={"grey"}
       value={value}
       onChangeText={onChange}
       onSubmitEditing={onSubmit}

@@ -88,13 +88,11 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     zIndex: 0,
   },
-
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.26)",
     zIndex: 1,
   },
-
   content: {
     flex: 1,
     zIndex: 2,

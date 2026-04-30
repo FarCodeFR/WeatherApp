@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
     margin: 30,
     fontFamily: "SFProSemiboldItalic",
     marginBottom: 0,
+    textShadowColor: "rgba(0,0,0,0.8)",
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 6,
   },
   tempsText: {
     color: "#ffffff",
