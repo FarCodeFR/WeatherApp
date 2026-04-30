@@ -23,6 +23,7 @@ export type WeatherInterpretation = {
   codes: number[];
   label: string;
   image: ImageSourcePropType;
+  video?: number;
   icon: ImageSourcePropType;
 };
 

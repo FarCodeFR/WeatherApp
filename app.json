@@ -47,7 +47,8 @@
           "SFProRegular": "./assets/fonts/SFPRODISPLAYREGULAR.ttf",
           "SFProSemiboldItalic": "./assets/fonts/SFPRODISPLAYSEMIBOLDITALIC.ttf"
         }
-      ]
+      ],
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true,

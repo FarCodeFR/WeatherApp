@@ -7,6 +7,7 @@ import CustomBackground from "./BgSheet";
 import HourlyForecast from "./HourlyForecast";
 import SearchBar from "./SearchBar";
 import WeekForcast from "./WeekForecast";
+import LoaderComponents from "./LoaderComponents";
 
 const ScrollSheet = ({
   sunriseISO,
@@ -23,6 +24,7 @@ const ScrollSheet = ({
   const handleSubmit = useCallback(() => {
     const cityName = cityText.trim();
     if (!cityName) {
+      console.log("Erreur lors de la récupération de la ville");
       return;
     } else {
       searchCity(cityName);
@@ -62,13 +64,9 @@ const ScrollSheet = ({
               sunsetISO={sunsetISO}
             />
           ) : (
-            <Text>Chargement...</Text>
+            <LoaderComponents />
           )}
-          {daily && hourly ? (
-            <WeekForcast daily={daily} />
-          ) : (
-            <Text>Chargement...</Text>
-          )}
+          {daily ? <WeekForcast daily={daily} /> : <LoaderComponents />}
           <SearchBar
             value={cityText}
             onChange={setCityText}

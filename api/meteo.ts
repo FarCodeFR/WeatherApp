@@ -20,7 +20,7 @@ export class CityAPI {
   static async searchCity(city: string) {
     try {
       const response = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=10&language=fr&format=json`,
+        `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&language=fr&format=json`,
       );
       if (!response.ok) {
         throw new Error("Erreur API météo");
